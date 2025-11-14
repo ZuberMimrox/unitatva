@@ -1,0 +1,110 @@
+<odoo>
+    <data>
+        <template id="portal_my_orders_inherit" inherit_id="sale.portal_my_orders">
+
+            <!-- Add Table Header -->
+            <xpath expr="//thead/tr" position="inside">
+                <th class="text-center">Tracking Status</th>
+            </xpath>
+
+            <!-- Add Tracking Status Column -->
+           <xpath expr="//t[@t-foreach='orders']/tr" position="inside">
+            <td class="text-center">
+
+                <!-- Pending -->
+                <t t-if="order.tracking_status == 'pending'">
+                    <span class="badge rounded-pill text-white bg-secondary">Pending</span>
+                </t>
+
+                <!-- Processing -->
+                <t t-elif="order.tracking_status == 'processing'">
+                    <span class="badge rounded-pill text-white bg-primary">Processing</span>
+                </t>
+
+                <!-- Confirmed -->
+                <t t-elif="order.tracking_status == 'confirmed'">
+                    <span class="badge rounded-pill text-white bg-info">Confirmed</span>
+                </t>
+
+                <!-- Received -->
+                <t t-elif="order.tracking_status == 'received'">
+                    <span class="badge rounded-pill text-white bg-success">Received</span>
+                </t>
+
+                <!-- Ready to Ship -->
+                <t t-elif="order.tracking_status == 'ready_to_ship'">
+                    <span class="badge rounded-pill text-dark bg-warning">Ready to Ship</span>
+                </t>
+
+                <!-- Shipped -->
+                <t t-elif="order.tracking_status == 'shipped'">
+                    <span class="badge rounded-pill text-white bg-purple">Shipped</span>
+                </t>
+
+                <!-- Out for Delivery -->
+                <t t-elif="order.tracking_status == 'out_of_delivery'">
+                    <span class="badge rounded-pill text-white bg-info">Out for Delivery</span>
+                </t>
+
+                <!-- Delivered -->
+                <t t-elif="order.tracking_status == 'delivered'">
+                    <span class="badge rounded-pill text-white bg-success">Delivered</span>
+                </t>
+
+                <!-- Fulfilled -->
+                <t t-elif="order.tracking_status == 'fulfilled'">
+                    <span class="badge rounded-pill text-white bg-success">Fulfilled</span>
+                </t>
+
+                <!-- Cancelled -->
+                <t t-elif="order.tracking_status == 'cancelled'">
+                    <span class="badge rounded-pill text-white bg-danger">Cancelled</span>
+                </t>
+
+                <!-- Returned -->
+                <t t-elif="order.tracking_status == 'returned'">
+                    <span class="badge rounded-pill text-white bg-brown">Returned</span>
+                </t>
+
+                <!-- Warranty Claim -->
+                <t t-elif="order.tracking_status == 'warranty_claim'">
+                    <span class="badge rounded-pill text-white bg-orange">Warranty Claim</span>
+                </t>
+
+                <!-- Errors -->
+                <t t-elif="order.tracking_status in ['receiving_error', 'delivery_fail', 'receive_fail']">
+                    <span class="badge rounded-pill text-white bg-danger">Error</span>
+                </t>
+
+                <!-- Delayed -->
+                <t t-elif="order.tracking_status == 'delayed'">
+                    <span class="badge rounded-pill text-dark bg-warning">Delayed</span>
+                </t>
+
+                <!-- Other -->
+                <t t-elif="order.tracking_status == 'other'">
+                    <span class="badge rounded-pill text-white bg-dark">Other</span>
+                </t>
+
+                <!-- Order Date Filters -->
+                <t t-elif="order.tracking_status in ['order_date_lt', 'order_date_el']">
+                    <span class="badge rounded-pill text-white bg-dark">
+                        <t t-esc="order.tracking_status"/>
+                    </span>
+                </t>
+
+                <!-- Default -->
+                <t t-else="">
+                    <span class="badge rounded-pill text-white bg-secondary">
+                        <t t-esc="order.tracking_status"/>
+                    </span>
+                </t>
+
+            </td>
+        </xpath>
+
+
+
+        </template>
+    </data>
+</odoo>
