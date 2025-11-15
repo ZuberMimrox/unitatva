@@ -1,0 +1,78 @@
+<odoo>
+    <data>
+
+        <template id="portal_order_page_custom" inherit_id="sale.sale_order_portal_content">
+
+            <xpath expr="//table[@id='sales_order_table']/tbody" position="inside">
+
+                <t t-foreach="sale_order.order_line" t-as="line">
+                    <div class="row my-4 p-3" style="border: 1px solid #e5e7eb; border-radius: 10px;">
+
+                        <div class="col-lg-8 d-flex">
+
+                            <div class="me-3">
+                                <img t-if="line.product_id.image_128"
+                                     t-att-src="'data:image/png;base64,%s' % line.product_id.image_128"
+                                     style="width:100px; height:100px; border-radius:8px;" />
+
+                                <div t-else=""
+                                     style="width:100px; height:100px; border-radius:8px; background:#f2f2f2;">
+                                </div>
+                            </div>
+
+                            <div>
+                                <h5 class="fw-bold">
+                                    <t t-esc="line.product_id.name"/>
+                                </h5>
+
+                                <p class="text-muted">
+                                    <t t-esc="line.product_id.description_sale"/>
+                                </p>
+
+                                <div class="d-flex gap-3 mt-2">
+
+                                    <t t-if="'Color' in [attr.attribute_id.name for attr in line.product_template_attribute_value_ids]">
+                                        <div>
+                                            <span class="text-muted">Color :</span>
+                                            <span style="width:18px; height:18px; border-radius:50%; display:inline-block;"
+                                                  t-att-style="'background:%s' % [v.name for v in line.product_template_attribute_value_ids if v.attribute_id.name=='Color'][0]">
+                                            </span>
+                                        </div>
+                                    </t>
+
+                                    <t t-if="'Size' in [attr.attribute_id.name for attr in line.product_template_attribute_value_ids]">
+                                        <div>
+                                            <span class="text-muted">Size :</span>
+                                            <span class="border rounded px-2 py-1">
+                                                <t t-esc="[v.name for v in line.product_template_attribute_value_ids if v.attribute_id.name=='Size'][0]"/>
+                                            </span>
+                                        </div>
+                                    </t>
+
+                                    <t t-if="'Material' in [attr.attribute_id.name for attr in line.product_template_attribute_value_ids]">
+                                        <div>
+                                            <span class="text-muted">Material :</span>
+                                            <span class="border rounded px-2 py-1">
+                                                <t t-esc="[v.name for v in line.product_template_attribute_value_ids if v.attribute_id.name=='Material'][0]"/>
+                                            </span>
+                                        </div>
+                                    </t>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </t>
+
+                <div class="text-end fw-bold fs-5 mt-4">
+                    Order Subtotal : $ <t t-esc="sale_order.amount_total"/>
+                </div>
+
+            </xpath>
+
+        </template>
+
+    </data>
+</odoo>

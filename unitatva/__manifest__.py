@@ -26,6 +26,7 @@ Long description of module's purpose
         'views/views.xml',
         'views/sale_order_view.xml',
         'views/templates.xml',
+        'views/portal_my_order_details.xml',
         'views/sale_order_website_templates.xml',
     ],
     # only loaded in demonstration mode

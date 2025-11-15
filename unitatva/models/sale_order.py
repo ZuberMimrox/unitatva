@@ -3,7 +3,6 @@ from odoo import api, fields, models, _
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-
     tracking_status = fields.Selection([
         ('order_date_lt', 'Order Date(Latest)'),
         ('order_date_el', 'Order Date(Earliest)'),
